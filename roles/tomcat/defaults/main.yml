@@ -24,8 +24,9 @@ jfrog_passwd: "{{ lookup('env', 'JFROG_TOKEN') }}"
 
 # defaults for application
 deploy_version: 0.0.1-SNAPSHOT
+new_version: 0.0.1-20221219.074010-13
 deploy_repo: libs-snapshot/com/hello/HelloWorld
-deploy_file_name: HelloWorld-{{ deploy_version }}.jar
+deploy_file_name: HelloWorld-{{ new_version }}.jar
 deploy_url: https://jfrogartifactorymk12.jfrog.io/artifactory/{{ deploy_repo }}/{{ deploy_version }}/{{ deploy_file_name }}
 
  
