@@ -1,4 +1,10 @@
 ---
+- name: updating repos
+  yum:
+     name: "*"
+     state: latest
+     update_cache: true
+     use_backend: "yum"
 - name: install openjdk 17
   package:
     name: "{{ java_package }}"
