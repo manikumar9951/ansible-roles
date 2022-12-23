@@ -1,0 +1,40 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: javatest
+  region: us-west-2
+  version: "1.22"
+
+
+vpc:
+  id: "vpc-0fea85df62c5e05e4"  
+  cidr: "192.168.0.0/16"       
+  subnets:
+    private:
+      us-west-2b:
+        id: "subnet-02fb3cb629afac247"
+        cidr: "192.168.192.0/18"
+      
+      us-west-2a:
+        id: "subnet-0a4d8daea03532c7c"
+        cidr: "192.168.128.0/18"
+
+    public:
+      us-west-2b:
+        id: "subnet-0b5da00f05080a3ae"
+        cidr: "192.168.64.0/18"  
+
+      us-west-2a:
+        id: "subnet-09b1c3b35bdced039"
+        cidr: "192.168.0.0/18"  
+      
+
+nodeGroups:
+  - name: JavaTestEKS
+    instanceType: t2.medium
+    desiredCapacity: 1
+    ssh:
+      allow: false
+    privateNetworking: true
+

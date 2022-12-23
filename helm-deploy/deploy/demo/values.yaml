@@ -1,0 +1,19 @@
+replicaCount: 1
+
+image:
+  name: docker-container
+  repository: 513704694763.dkr.ecr.us-west-2.amazonaws.com/docker-container
+  pullPolicy: IfNotPresent
+
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+container:
+  port: 8080
+
+service:
+  protocol: TCP
+  type: ClusterIP
+  port: 8080

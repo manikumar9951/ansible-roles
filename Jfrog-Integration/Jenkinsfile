@@ -1,0 +1,43 @@
+pipeline{
+    agent any
+    environment {
+        PATH = "$PATH:/usr/share/apache-maven/bin"
+    }
+    parameters {
+        string(name: 'RELEASE_REPO', defaultValue: "libs-release", description: 'Repo for releses')
+        string(name: 'SNAPSHOT_REPO', defaultValue: "libs-snapshot", description: 'Repo for snapshot releses')
+        
+    }
+    stages{
+        stage('scm'){
+            steps{
+                git branch: 'main', 
+                credentialsId: 'github', 
+                url: 'https://github.com/manikumar9951/manikumarpadmanabham'
+            }
+        }
+        stage('Artifactory-Configuration') {
+            steps {
+                rtMavenDeployer (
+                    id: 'spc-deployer',
+                    serverId: 'jfrog-artifactory',
+                    releaseRepo: "${params.RELEASE_REPO}",
+                    snapshotRepo: "${params.SNAPSHOT_REPO}"
+                    
+                )
+            }
+        }
+        stage('Upload artifacts to jfrog') {
+            steps {
+                rtMavenRun (
+                    // Tool name from Jenkins configurations.
+                    tool: 'MVN_BUILD',
+                    pom: 'pom.xml',
+                    goals: 'install',
+                    // Maven options.
+                    deployerId: 'spc-deployer'
+                )
+            }
+        }
+    }
+}

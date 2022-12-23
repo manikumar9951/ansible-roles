@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javatest
+  namespace: default
+  labels:
+    app: javatest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: javatest
+  template:
+    metadata:
+      labels:
+        app: javatest
+    spec: 
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: docker-container
+        image: 513704694763.dkr.ecr.us-west-2.amazonaws.com/docker-container:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080

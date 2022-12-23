@@ -1,0 +1,29 @@
+---
+java_package: openjdk-11-jdk
+java_home: /usr/lib/jvm/java-11-openjdk-amd64
+
+# defaults file for tomcat
+username: tomcat
+home_dir: /opt/tomcat
+default_shell: /bin/false
+tomcat_version: 9.0.69
+tomcat_latest: /opt/tomcat/latest
+tomcat_bin_directory: /opt/tomcat/latest/bin/
+tomcat_service_location: /etc/systemd/system/tomcat.service
+tomcat_admin_user: tomcat
+tomcat_admin_password: tomcat
+tomcat_users_relative: conf/tomcat-users.xml
+tomcat_manager_allow_ipregex: ".*"
+tomcat_allow_context_locations:
+- /opt/tomcat/latest/webapps/manager/META-INF/context.xml
+- /opt/tomcat/latest/webapps/host-manager/META-INF/context.xml
+
+# Jfrog creds 
+jfrog_user: "{{ lookup('env', 'JFROG_USERNAME') }}"
+jfrog_passwd: "{{ lookup('env', 'JFROG_TOKEN') }}"
+
+# defaults for application
+deploy_version: 2.7.3
+deploy_repo: spring-new-libs-release/org/springframework/samples/spring-petclinic
+deploy_file_name: spring-petclinic-{{ deploy_version }}.jar
+deploy_url: https://harispringpetclinicnew.jfrog.io/artifactory/{{ deploy_repo }}/{{ deploy_version }}/{{ deploy_file_name }}
