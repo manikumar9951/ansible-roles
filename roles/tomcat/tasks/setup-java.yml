@@ -1,7 +1,4 @@
 ---
-- name: update apt repo and cache
-  apt:
-    update_cache: yes
 - name: install openjdk 17
   package:
     name: "{{ java_package }}"
