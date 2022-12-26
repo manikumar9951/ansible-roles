@@ -1,42 +1,22 @@
 pipeline{
     agent any
-    environment {
-        PATH = "$PATH:/usr/share/apache-maven/bin"
-    }
-    parameters {
-        string(name: 'RELEASE_REPO', defaultValue: "libs-release", description: 'Repo for releses')
-        string(name: 'SNAPSHOT_REPO', defaultValue: "libs-snapshot", description: 'Repo for snapshot releses')
-        
-    }
     stages{
-        stage('scm'){
+         stage('scm'){
             steps{
-                git branch: 'main', 
-                credentialsId: 'github', 
-                url: 'https://github.com/manikumar9951/manikumarpadmanabham'
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], 
+                extensions: [], 
+                userRemoteConfigs: [[credentialsId: 'faa7509c-4a0f-4b59-89f6-f50fe0cf9857',
+                url: 'https://github.com/manikumar9951/ansible-roles.git']]])
             }
         }
-        stage('Artifactory-Configuration') {
-            steps {
-                rtMavenDeployer (
-                    id: 'spc-deployer',
-                    serverId: 'jfrog-artifactory',
-                    releaseRepo: "${params.RELEASE_REPO}",
-                    snapshotRepo: "${params.SNAPSHOT_REPO}"
+        stage('utility usage '){
+            steps{
+                script{
+                    sh '''
+                    sh usage.sh
                     
-                )
-            }
-        }
-        stage('Upload artifacts to jfrog') {
-            steps {
-                rtMavenRun (
-                    // Tool name from Jenkins configurations.
-                    tool: 'MVN_BUILD',
-                    pom: 'pom.xml',
-                    goals: 'install',
-                    // Maven options.
-                    deployerId: 'spc-deployer'
-                )
+                    '''
+                }
             }
         }
     }
