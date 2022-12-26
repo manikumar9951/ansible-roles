@@ -67,8 +67,6 @@
     dest: "{{ tomcat_latest }}/{{ tomcat_users_relative }}"
     owner: "{{ username }}"
     group: "{{ username }}"
-  #notify:
-    #- reload the daemon, enable and start the tomcat service
 - name: allow hostmanager and manager from specified ip range
   ansible.builtin.template:
     src: 'manager-context.xml.j2'
@@ -76,5 +74,3 @@
     owner: "{{ username }}"
     group: "{{ username }}"
   loop: "{{ tomcat_allow_context_locations }}"
-  # notify:
-  #   - reload the daemon, enable and start the tomcat service
