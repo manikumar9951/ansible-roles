@@ -2,7 +2,7 @@
 - name: deploy any War file
   copy:
     src: /var/lib/jenkins/workspace/Pipeline/com/hello/HelloWorld/0.0.1-SNAPSHOT/HelloWorld-0.0.1-20221219.064922-10.war
-    dest: /opt/tomcat/latest/webapp
+    dest: /opt/tomcat/latest/webapp/HelloWorld-0.0.1-20221219.064922-10.war
     owner: "{{ username }}"
     group: "{{ username }}"
   notify:
