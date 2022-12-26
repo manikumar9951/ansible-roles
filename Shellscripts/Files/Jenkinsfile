@@ -1,0 +1,19 @@
+pipeline{
+    agent {label 'master'}
+    parameters {
+        string(name: 'days', defaultValue: "1", description: 'Accept no of days')
+        
+    }
+    stages{
+        stage('List of files '){
+            steps{
+                script{
+                    sh '''
+                    find /opt -type f -mtime -"${days}" -exec ls -lart -sh {} +
+                    
+                    '''
+                }
+            }
+        }
+    }
+}
