@@ -1,11 +1,12 @@
 ---
-- name: deploy any Jar file
+- name: deploy any War file
   ansible.builtin.get_url:
-    url: "{{ deploy_url }}"
-    dest: "{{ tomcat_latest }}/webapps/{{ deploy_file_name }}"
+    #url: "{{ deploy_url }}"
+    #dest: "{{ tomcat_latest }}/webapps/{{ deploy_file_name }}"
+    copy:
+         src: /var/lib/jenkins/workspace/Pipeline/com/hello/HelloWorld/0.0.1-SNAPSHOT/HelloWorld-0.0.1-20221219.064922-10.war
+         dest: /opt/tomcat/latest/webapp
     owner: "{{ username }}"
     group: "{{ username }}"
-    url_username: "{{ jfrog_user }}"
-    url_password: "{{ jfrog_passwd }}"
   notify:
     - reload the daemon, enable and start the tomcat service

@@ -4,7 +4,3 @@
   roles:
     - role: roles/tomcat
       become: yes
-  - name: war file copy to tomcat server
-        copy:
-         src: /var/lib/jenkins/workspace/Pipeline/com/hello/HelloWorld/0.0.1-SNAPSHOT/HelloWorld-0.0.1-20221219.064922-10.war
-         dest: /opt/tomcat/latest/webapps
