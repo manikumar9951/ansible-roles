@@ -25,7 +25,7 @@ fi
 mem_usage () {
  #MB units
 mem_free=`free -m | grep "Mem" | awk '{print $4+$6}'`
- echo "Memory Space Semaining : $mem_free MB"
+ echo "Memory Remaining : $mem_free MB"
 if [ $mem_free -lt $mem_threshold  ]
     then
         echo "Memory status: Warning!"
