@@ -46,7 +46,7 @@ pipeline{
                     spec: '''{
                         "files": [
                             {
-                            "pattern": "libs-snapshot/com/hello/HelloWorld/0.0.1-SNAPSHOT/HelloWorld-0.0.1-20221223.074440-56.jar",
+                            "pattern": "libs-snapshot/com/hello/HelloWorld/0.0.1-SNAPSHOT/HelloWorld-0.0.1-20221219.064922-10.war",
                             "target": "./"
                             }
                         ]
@@ -54,7 +54,7 @@ pipeline{
                 )
             }
         }
-        stage('Apache-Deploy'){
+        stage('Ansible-role-deploy'){
             steps{
                ansiblePlaybook credentialsId: 'ec2-user', disableHostKeyChecking: true, installation: 'ansible2', inventory: 'Inventory', playbook: 'playbook.yml'
             }
