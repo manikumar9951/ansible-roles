@@ -56,4 +56,3 @@ fi
 cpu_usage
 mem_usage
 disk_usage
-awk -F':' '{printf "cpu_usage", mem_usage, (/^disk_usage/)?"\n":"\t|"}' file
