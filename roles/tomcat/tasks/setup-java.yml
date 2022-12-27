@@ -1,7 +1,0 @@
----
-- name: updating repos
-  yum:
-     name: "*"
-     state: latest
-     update_cache: true
-     use_backend: "yum"
