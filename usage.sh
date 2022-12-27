@@ -33,6 +33,7 @@ if [ $mem_free -lt $mem_threshold  ]
         MESSAGE="Memory is low, please check"
         TO="example@gmail.com"
     else
+    
         echo "Memory Staus: Ok"
 fi
 }
@@ -55,3 +56,4 @@ fi
 cpu_usage
 mem_usage
 disk_usage
+awk -F':' '{printf "cpu_usage", mem_usage, (/^disk_usage/)?"\n":"\t|"}' file
