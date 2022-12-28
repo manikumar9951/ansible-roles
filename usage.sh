@@ -11,7 +11,7 @@ cpu_usage () {
 cpu_idle=`top -b -n 1 | grep Cpu | awk '{print $8}'|cut -f 1 -d "."`
 cpu_use=`expr 100 - $cpu_idle`
  echo "Cpu Utilization: $cpu_use %"
-if [ $cpu_use -gt $cpu_threshold ]
+if [ "$cpu_use" -gt "$cpu_threshold" ]
     then
         echo "Cpu Staus: Warning!"
         SUBJECT="ATTENTION: CPU load is high"
