@@ -1,6 +1,6 @@
 ---
 - name: install tomcat and deploy the application
   hosts: Deploy
-  roles:
-    - role: roles/tomcat
-      become: yes
+  copy:
+    src: /var/lib/jenkins/workspace/Pipeline/com/hello/HelloWorld/0.0.1-SNAPSHOT/HelloWorld-0.0.1-{version}.jar
+    dest: /opt/tomcat/latest/webapps
