@@ -47,7 +47,7 @@ disk_use=`df -P | grep /dev | grep -v -E '(tmp|boot)' | awk '{print $5}' | cut -
  echo "Disk Usage : $disk_use %"
 if [ $disk_use -gt $disk_threshold ]
     then
-        echo "Status of Disk Usage : Disk space warning! on $(hostname) at $(date)" >> /tmp/Mail.out
+        echo "Disk space warning!, Disk space is very low, Please fix disks space issue on $(hostname) at $(date)" >> /tmp/Mail.out
         SUBJECT="ATTENTION: disk space is low"
         MESSAGE="/tmp/Mail.out"
         TO="pnvmanikumar@gmail.com"
