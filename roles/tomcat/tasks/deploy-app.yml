@@ -1,9 +1,0 @@
----
-- name: deploy any War file
-  copy:
-    src: /var/lib/jenkins/workspace/Pipeline/com/hello/HelloWorld/0.0.1-SNAPSHOT/HelloWorld-0.0.1-{version}.jar
-    dest: /opt/tomcat/latest/webapps
-    owner: "{{ username }}"
-    group: "{{ username }}"
-  notify:
-    - reload the daemon, enable and start the tomcat service
