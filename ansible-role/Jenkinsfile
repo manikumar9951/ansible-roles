@@ -6,7 +6,7 @@ pipeline{
     parameters {
         string(name: 'RELEASE_REPO', defaultValue: "libs-release", description: 'Repo for releses')
         string(name: 'SNAPSHOT_REPO', defaultValue: "libs-snapshot", description: 'Repo for snapshot releses')
-        string(name: 'ART_VERSION', defaultValue: "20221229.101026-1", description: 'Repo for snapshot releses')
+        string(name: 'ART_VERSION', defaultValue: "20221229.141020-27", description: 'Repo for snapshot releses')
         
         
     }
@@ -49,8 +49,8 @@ pipeline{
                     spec: '''{
                         "files": [
                             {
-                        "pattern": "/var/lib/jenkins/workspace/ansible-role-deployment/target/com/hello/HelloWorld/0.0.1-SNAPSHOT/HelloWorld-0.0.1-${ART_VERSION}.jar",
-                            "target": "./"
+                        "pattern": "libs-snapshot/com/hello/HelloWorld/0.0.1-SNAPSHOT/HelloWorld-0.0.1-${ART_VERSION}.war",
+                            "target": "./target/"
                             }
                         ]
                     }''',
