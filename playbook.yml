@@ -5,8 +5,7 @@
   tasks:
     - name: copying file to tomcat server
       copy:
-        src: /var/lib/jenkins/workspace/ansible-role-deployment/target/com/hello/HelloWorld/0.0.1-SNAPSHOT
-/HelloWorld-0.0.1-{{ version }}.jar
+        src: /var/lib/jenkins/workspace/ansible-role-deployment/target/com/hello/HelloWorld/0.0.1-SNAPSHOT/HelloWorld-0.0.1-{{ version }}.jar
         dest: /opt/tomcat/latest/webapps
         remote_src: true
       notify:
