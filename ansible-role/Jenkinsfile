@@ -6,14 +6,17 @@ pipeline{
     parameters {
         string(name: 'RELEASE_REPO', defaultValue: "libs-release", description: 'Repo for releses')
         string(name: 'SNAPSHOT_REPO', defaultValue: "libs-snapshot", description: 'Repo for snapshot releses')
+        string(name: 'ART_VERSION', defaultValue: "20221229.101026-1", description: 'Repo for snapshot releses')
+        
         
     }
     stages{
         stage('scm'){
             steps{
-                git branch: 'main', 
-                credentialsId: 'github', 
-                url: 'https://github.com/manikumar9951/ansible-roles'
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], 
+                extensions: [], 
+                userRemoteConfigs: [[credentialsId: 'faa7509c-4a0f-4b59-89f6-f50fe0cf9857',
+                url: 'https://github.com/manikumar9951/ansible-roles.git']]])
             }
         }
         stage('Artifactory-Configuration') {
@@ -46,7 +49,7 @@ pipeline{
                     spec: '''{
                         "files": [
                             {
-                            "pattern": "libs-snapshot/com/hello/HelloWorld/0.0.1-SNAPSHOT/HelloWorld-0.0.1-20221219.064922-10.war",
+                        "pattern": "/var/lib/jenkins/workspace/ansible-role-deployment/target/com/hello/HelloWorld/0.0.1-SNAPSHOT/HelloWorld-0.0.1-${ART_VERSION}.jar",
                             "target": "./"
                             }
                         ]
@@ -54,9 +57,9 @@ pipeline{
                 )
             }
         }
-        stage('Ansible-role-deploy'){
+        stage('Apache-Deploy'){
             steps{
-               ansiblePlaybook credentialsId: 'ec2-user', disableHostKeyChecking: true, installation: 'ansible2', inventory: 'Inventory', playbook: 'playbook.yml'
+               ansiblePlaybook credentialsId: 'ec2-user', extras: "-e version=${ART_VERSION}", disableHostKeyChecking: true, installation: 'ansible2', inventory: 'Inventory', playbook: 'playbook.yml'
             }
         }
     }
